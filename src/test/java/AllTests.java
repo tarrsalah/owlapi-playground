@@ -19,7 +19,7 @@ import org.junit.runners.Suite;
  * @author tarrsalah
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({PlaygroundTest.class})
+@Suite.SuiteClasses({Tutorial2011Test.class})
 public class AllTests {
 
     private static final int PORT = 3001;
