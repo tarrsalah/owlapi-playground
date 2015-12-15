@@ -11,12 +11,16 @@ import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
 
 /**
  *
  * @author tarrsalah
  */
-public class HTTPServerTest {
+@RunWith(Suite.class)
+@Suite.SuiteClasses({PlaygroundTest.class})
+public class AllTests {
 
     private static final int PORT = 3001;
     private static final String BASE_URL = "http://localhost";
@@ -24,17 +28,17 @@ public class HTTPServerTest {
 
     @BeforeClass
     public static void setUp() throws IOException {
-        HTTPServerTest.server = GrizzlyHttpServerFactory
+        AllTests.server = GrizzlyHttpServerFactory
                 .createHttpServer(UriBuilder.fromUri(BASE_URL).port(PORT).build());
 
-        HTTPServerTest.server.getServerConfiguration().addHttpHandler(
+        AllTests.server.getServerConfiguration().addHttpHandler(
                 new StaticHttpHandler("src/main/resources"
                 ), "/");
-        HTTPServerTest.server.start();
+        AllTests.server.start();
     }
 
     @AfterClass
     public static void tearDown() {
-        HTTPServerTest.server.shutdown();
+        AllTests.server.shutdown();
     }
 }

@@ -21,7 +21,7 @@ import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
  *
  * @author tarrsalah
  */
-public class PlaygroundTest extends HTTPServerTest {
+public class PlaygroundTest {
 
     private final IRI documentIRI;
     private final OWLOntologyManager manager;
