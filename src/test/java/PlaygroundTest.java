@@ -21,7 +21,7 @@ import org.semanticweb.owlapi.reasoner.structural.StructuralReasonerFactory;
  *
  * @author tarrsalah
  */
-public class PlaygroundTest extends HTTPServerTest{
+public class PlaygroundTest extends HTTPServerTest {
 
     private final IRI documentIRI;
     private final OWLOntologyManager manager;
@@ -29,11 +29,6 @@ public class PlaygroundTest extends HTTPServerTest{
     public PlaygroundTest() {
         this.documentIRI = IRI.create("http://127.0.0.1:3001/ontology/books.owl");
         this.manager = OWLManager.createOWLOntologyManager();
-    }
-    
-    @Test
-    public void shoudlWebServerStart() {
- 
     }
 
     @Test
@@ -43,7 +38,7 @@ public class PlaygroundTest extends HTTPServerTest{
         OWLReasonerFactory reasonerFactory = new StructuralReasonerFactory();
         OWLReasonerConfiguration config = new SimpleConfiguration();
         OWLReasoner reasoner = reasonerFactory.createReasoner(ontology, config);
-        
+
         reasoner.getRootOntology().getSignature().stream().forEach((OWLEntity t) -> {
             System.out.println(t.toString());
         });

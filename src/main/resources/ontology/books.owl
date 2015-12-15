@@ -15,8 +15,8 @@
 
     <!-- Ontology Information -->
     <owl:Ontology rdf:about=""
-              rdfs:label="Book Ontology"
-              owl:versionInfo="1.0">
+                  rdfs:label="Book Ontology"
+                  owl:versionInfo="1.0">
         <rdfs:comment>An ontology containing information about books</rdfs:comment>
         <owl:imports>
             <owl:Ontology rdf:about="&simplified_sumo.owl;"/>

@@ -9,8 +9,8 @@ import javax.ws.rs.core.UriBuilder;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.grizzly.http.server.StaticHttpHandler;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -20,23 +20,21 @@ public class HTTPServerTest {
 
     private static final int PORT = 3001;
     private static final String BASE_URL = "http://localhost";
-    private final HttpServer server;
+    private static HttpServer server;
 
-    public HTTPServerTest() {
-        this.server = GrizzlyHttpServerFactory
+    @BeforeClass
+    public static void setUp() throws IOException {
+        HTTPServerTest.server = GrizzlyHttpServerFactory
                 .createHttpServer(UriBuilder.fromUri(BASE_URL).port(PORT).build());
-    }
 
-    @Before
-    public void setUp() throws IOException {
-        this.server.getServerConfiguration().addHttpHandler(               
+        HTTPServerTest.server.getServerConfiguration().addHttpHandler(
                 new StaticHttpHandler("src/main/resources"
                 ), "/");
-        this.server.start();
+        HTTPServerTest.server.start();
     }
 
-    @After
-    public void tearDown() {
-        this.server.shutdown();
+    @AfterClass
+    public static void tearDown() {
+        HTTPServerTest.server.shutdown();
     }
 }
