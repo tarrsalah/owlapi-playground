@@ -14,8 +14,10 @@ import org.junit.rules.TestName;
 import org.semanticweb.owlapi.apibinding.OWLManager;
 import org.semanticweb.owlapi.formats.FunctionalSyntaxDocumentFormat;
 import org.semanticweb.owlapi.io.StringDocumentTarget;
+import org.semanticweb.owlapi.model.EntityType;
 import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLClass;
+import org.semanticweb.owlapi.model.OWLDataFactory;
 import org.semanticweb.owlapi.model.OWLOntology;
 import org.semanticweb.owlapi.model.OWLOntologyCreationException;
 import org.semanticweb.owlapi.model.OWLOntologyManager;
@@ -35,6 +37,7 @@ public class Tutorial2011Test {
     private static final IRI documentIRI = IRI.create("http://127.0.0.1:3001/ontology/books.owl");
     private static final Logger logger = LoggerFactory.getLogger(Tutorial2011Test.class);
     private final OWLOntologyManager manager;
+    private final OWLDataFactory dataFactory;
     private final OWLOntology booksOntology;
 
     @Before
@@ -44,6 +47,7 @@ public class Tutorial2011Test {
 
     public Tutorial2011Test() throws OWLOntologyCreationException {
         this.manager = OWLManager.createOWLOntologyManager();
+        this.dataFactory = manager.getOWLDataFactory();
         this.booksOntology = manager.loadOntologyFromOntologyDocument(Tutorial2011Test.documentIRI);
 
     }
@@ -70,5 +74,15 @@ public class Tutorial2011Test {
         final StringDocumentTarget target = new StringDocumentTarget();
         manager.saveOntology(booksOntology, new FunctionalSyntaxDocumentFormat(), target);
         logger.info(target.toString());
+    }
+
+    @Test
+    public void shouldCreateEntityClass() {
+        OWLClass clazz = this.dataFactory.getOWLEntity(
+                EntityType.CLASS,
+                documentIRI.resolve("#entity_class_example")
+        );
+        logger.info(clazz.toString());
+        assertNotNull(clazz);
     }
 }
